@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { supabase } from "../lib/supabaseClient";
+import wilayah from "@/data/wilayah";
 
 export default function Dashboard() {
   const [formData, setFormData] = useState({
@@ -32,7 +33,6 @@ export default function Dashboard() {
     "Sumatera Utara",
     "Sulawesi Selatan",
     "Kalimantan Timur",
-    // Tambahkan lebih banyak sesuai kebutuhan
   ];
 
   useEffect(() => {
@@ -59,6 +59,24 @@ export default function Dashboard() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleChangeWilayah = (e) => {
+    const { name, value } = e.target;
+
+    // Reset kabupaten jika provinsi berubah
+    if (name === "provinsi") {
+      setFormData((prev) => ({
+        ...prev,
+        provinsi: value,
+        kabupaten: "", // reset kabupaten
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   return (
@@ -98,16 +116,18 @@ export default function Dashboard() {
                 Jenis Kelamin *
               </label>
               <div className="col-md-9">
-                <select
-                  className="form-control"
-                  name="jenis_kelamin"
-                  value={formData.jenis_kelamin || ""}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Pilih Jenis Kelamin --</option>
-                  <option value="Laki-laki">Laki-laki</option>
-                  <option value="Perempuan">Perempuan</option>
-                </select>
+                <div className="select-with-icon">
+                  <select
+                    className="form-control"
+                    name="jenis_kelamin"
+                    value={formData.jenis_kelamin || ""}
+                    onChange={handleChange}
+                  >
+                    <option value="">-- Pilih Jenis Kelamin --</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -121,14 +141,16 @@ export default function Dashboard() {
                   {label}
                 </label>
                 <div className="col-md-9">
-                  <input
-                    type={type}
-                    className="form-control"
-                    name={name}
-                    value={formData[name] || ""}
-                    onChange={handleChange}
-                    readOnly={readOnly}
-                  />
+                  <div className="select-with-icon">
+                    <input
+                      type={type}
+                      className="form-control"
+                      name={name}
+                      value={formData[name] || ""}
+                      onChange={handleChange}
+                      readOnly={readOnly}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -138,16 +160,18 @@ export default function Dashboard() {
                 Domisili tempat tinggal *
               </label>
               <div className="col-md-9">
-                <select
-                  className="form-control"
-                  name="provinsi"
-                  value={formData.provinsi || ""}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Pilih Domisili --</option>
-                  <option value="Dalam Negri">Dalam Negri</option>
-                  <option value="Luar Negri">Luar Negri</option>
-                </select>
+                <div className="select-with-icon">
+                  <select
+                    className="form-control"
+                    name="domisili"
+                    value={formData.domisili || ""}
+                    onChange={handleChange}
+                  >
+                    <option value="">-- Pilih Domisili --</option>
+                    <option value="Dalam Negri">Dalam Negri</option>
+                    <option value="Luar Negri">Luar Negri</option>
+                  </select>
+                </div>
               </div>
             </div>
             {/* Provinsi */}
@@ -156,45 +180,71 @@ export default function Dashboard() {
                 Provinsi *
               </label>
               <div className="col-md-9">
-                <select
-                  className="form-control"
-                  name="provinsi"
-                  value={formData.provinsi || ""}
-                  onChange={handleChange}
-                >
-                  <option value="">-- Pilih Provinsi --</option>
-                  {provinsiList.map((prov) => (
-                    <option key={prov} value={prov}>
-                      {prov}
-                    </option>
-                  ))}
-                </select>
+                <div className="select-with-icon">
+                  <select
+                    className="form-control"
+                    name="provinsi"
+                    value={formData.provinsi || ""}
+                    onChange={handleChange}
+                  >
+                    <option value="">-- Pilih Provinsi --</option>
+                    {provinsiList.map((prov) => (
+                      <option key={prov} value={prov}>
+                        {prov}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            {/* Kota Kabupaten */}
+            <div className="row mb-3">
+              <label className="col-md-3 col-form-label fw-bold">
+                Kota / Kabupaten *
+              </label>
+              <div className="col-md-9">
+                <div className="select-with-icon">
+                  <select
+                    className="form-control"
+                    name="kabupaten"
+                    value={formData.kabupaten || ""}
+                    onChange={handleChangeWilayah}
+                    disabled={!formData.provinsi}
+                  >
+                    <option value="">-- Pilih Kota / Kabupaten --</option>
+                    {formData.provinsi &&
+                      wilayah[formData.provinsi]?.map((kab) => (
+                        <option key={kab} value={kab}>
+                          {kab}
+                        </option>
+                      ))}
+                  </select>
+                </div>
               </div>
             </div>
 
-            {[
-              ["Kota / Kabupaten *", "kabupaten", "text"],
-              ["Kecamatan / Distrik *", "kecamatan", "text"],
-            ].map(([label, name, type, readOnly = false]) => (
-              <div className="row mb-3" key={name}>
-                <label className="col-md-3 col-form-label fw-bold">
-                  {label}
-                </label>
-                <div className="col-md-9">
-                  <input
-                    type={type}
-                    className="form-control"
-                    name={name}
-                    value={formData[name] || ""}
-                    onChange={handleChange}
-                    readOnly={readOnly}
-                  />
+            {[["Kecamatan / Distrik *", "kecamatan", "text"]].map(
+              ([label, name, type, readOnly = false]) => (
+                <div className="row mb-3" key={name}>
+                  <label className="col-md-3 col-form-label fw-bold">
+                    {label}
+                  </label>
+                  <div className="col-md-9">
+                    <input
+                      type={type}
+                      className="form-control"
+                      name={name}
+                      value={formData[name] || ""}
+                      onChange={handleChange}
+                      readOnly={readOnly}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
             <div className="text-end">
               <button
-                className="btn btn-success me-2"
+                className="btn btn-primary me-2"
                 onClick={async () => {
                   const {
                     data: { user },
@@ -207,12 +257,12 @@ export default function Dashboard() {
                   if (!error) alert("Data berhasil disimpan!");
                 }}
               >
-                Simpan
+                Simpan Data
               </button>
 
-              <Link href="/pendaftaran" className="btn btn-primary">
+              {/* <Link href="/pendaftaran" className="btn btn-primary">
                 Lanjutkan Pendaftaran PTPS
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

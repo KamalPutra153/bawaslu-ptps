@@ -10,7 +10,37 @@ export default function Pendaftaran() {
     riwayatHidup: "",
     fileBerkas: null,
     setuju: false,
+    pemilu: false,
+    pilkada: false,
+    nomorPendaftaran: "",
+    tipeAnggota: "",
+    namaLengkap: "",
+    jenisKelamin: "",
+    tempatLahir: "",
+    tanggalLahir: "",
+    pendidikanTerakhir: "",
+    Jurusan: "",
   });
+
+  const kelurahanKarangasihList = [
+    "Karangasih",
+    "Cigugur",
+    "Cimahi",
+    "Citeureup",
+    "Cipayung",
+    "Cijambu",
+    "Cigalontang",
+    "Cijawura",
+    "Cihanjuang",
+    "Cipayung",
+    "Citarik",
+    "Cijangkar",
+    "Cilame",
+    "Cigondewah",
+    "Cikijing",
+    "Cimulang",
+    "Citeureup",
+  ];
 
   const next = () => setStep((prev) => Math.min(prev + 1, 5));
   const prev = () => setStep((prev) => Math.max(prev - 1, 1));
@@ -75,15 +105,20 @@ export default function Pendaftaran() {
               "Mengirim Data",
               "Selesai",
             ].map((label, index) => (
-              <div key={index} className="text-center flex-fill">
+              <div key={index} className="wrapper text-center flex-fill">
                 <div
-                  className={`rounded-pill px-2 py-1 mb-1 ${
-                    step === index + 1
+                  className={`indikator d-flex align-items-center justify-content-center gap-2 rounded-pill p px-2 py-1 mb-1 ${
+                    step > index + 1
+                      ? "bg-success text-white fw-bold"
+                      : step === index + 1
                       ? "bg-danger text-white fw-bold"
                       : "bg-light border"
                   }`}
                   style={{ fontSize: "0.8rem", transition: "0.3s" }}
                 >
+                  {step > index + 1 && (
+                    <i className="fas fa-check-circle me-1"></i>
+                  )}
                   {label}
                 </div>
               </div>
@@ -97,39 +132,73 @@ export default function Pendaftaran() {
               <>
                 <div className="card mb-3">
                   <div>
-                    <h6>PANWASLU PILKADA 2024 TPS</h6>
-                    <a>
-                      input data calon pengawas TPS (PTPS) Untuk pemilihan 2024
-                    </a>
-                    <br />
-                    <a>
-                      Tanggal Pendaftaran : 31 Desember 2024 s/d 20 Februari
-                      2025
-                    </a>
+                    <div className="form-check mb-3">
+                      <input
+                        type="checkbox"
+                        name="pilkada"
+                        className="form-check-input"
+                        checked={formData.pilkada}
+                        onChange={handleChange}
+                        required
+                      />
+                      <label className="form-check-label">
+                        <h6>PANWASLU PILKADA 2024 TPS</h6>
+                        <a>
+                          input data calon pengawas TPS (PTPS) Untuk pemilihan
+                          2024
+                        </a>
+                        <br />
+                        <a>
+                          Tanggal Pendaftaran : 31 Desember 2024 s/d 20 Februari
+                          2025
+                        </a>
+                      </label>
+                    </div>
                   </div>
                   <div>
-                    <h6>PANWASLU PEMILU 2024 TPS</h6>
-                    <a>
-                      input data calon pengawas TPS (PTPS) Untuk pemilu 2024
-                    </a>
-                    <br />
-                    <a>
-                      Tanggal Pendaftaran : 31 Desember 2024 s/d 20 Februari
-                      2025
-                    </a>
+                    <div className="form-check mb-3">
+                      <input
+                        type="checkbox"
+                        name="pemilu"
+                        className="form-check-input"
+                        checked={formData.pemilu}
+                        onChange={handleChange}
+                        required
+                      />
+                      <label className="form-check-label">
+                        <h6>PANWASLU PEMILU 2024 TPS</h6>
+                        <a>
+                          input data calon pengawas TPS (PTPS) Untuk pemilu 2024
+                        </a>
+                        <br />
+                        <a>
+                          Tanggal Pendaftaran : 31 Desember 2024 s/d 20 Februari
+                          2025
+                        </a>
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div className="card mb-3">
                   <label className="form-label">Pilih Wilayah</label>
-                  <p>Kelurahan / Desa</p>
-                  <input
-                    type="text"
-                    name="posisi"
-                    className="form-control"
-                    required
-                    value={formData.posisi}
-                    onChange={handleChange}
-                  />
+                  <p>Kelurahan / Desa *</p>
+                  <div className="">
+                    <div className="select-with-icon">
+                      <select
+                        className="form-control"
+                        name="posisi"
+                        value={formData.posisi || ""}
+                        onChange={handleChange}
+                      >
+                        <option value="">-- Pilih Kelurahan / Desa --</option>
+                        {kelurahanKarangasihList.map((prov) => (
+                          <option key={prov} value={prov}>
+                            {prov}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </>
             )}
@@ -146,8 +215,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="nomorPendaftaran"
+                        value={formData.nomorPendaftaran}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -159,8 +229,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="tipeAnggota"
+                        value={formData.tipeAnggota}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -175,8 +246,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="namaLengkap"
+                        value={formData.namaLengkap}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -188,8 +260,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="jenisKelamin"
+                        value={formData.jenisKelamin}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -201,8 +274,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="tempatLahir"
+                        value={formData.tempatLahir}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -214,8 +288,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="tanggalLahir"
+                        value={formData.tanggalLahir}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -227,8 +302,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="pendidikanTerakhir"
+                        value={formData.pendidikanTerakhir}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -238,8 +314,9 @@ export default function Pendaftaran() {
                       <input
                         type="text"
                         className="form-control"
-                        value=""
-                        readOnly
+                        name="Jurusan"
+                        value={formData.Jurusan}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>

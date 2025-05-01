@@ -111,6 +111,33 @@ body {
   color: #2b2b2b;
 }
 
+.btn-outline-secondary {
+  border: solid 2px #dee2e6;
+}
+
+.select-with-icon {
+  position: relative;
+}
+
+.select-with-icon select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;
+}
+
+.select-with-icon::after {
+  content: "\f078"; /* Font Awesome Unicode for fa-chevron-down */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6c757d; /* optional: gray */
+}
+
 footer {
   background-color: #e3dfde;
 }
@@ -190,5 +217,12 @@ footer {
 }
 .pendaftaran-section .card .form-label {
   border-bottom: solid 2px #2b2b2b;
+}
+
+.pendaftaran-section .wrapper .indikator {
+  padding: 0.8rem !important;
+  border-radius: 10px !important;
+  margin: 0.5rem;
+  font-size: 14px;
 }
 /* PENDAFTARAN SECTION END */

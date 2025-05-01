@@ -139,7 +139,11 @@ export default function Daftar() {
                   onClick={() => setShowPassword((prev) => !prev)}
                   tabIndex={-1}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  <i
+                    className={`fa-solid ${
+                      showPassword ? "fa-eye-slash" : "fa-eye"
+                    }`}
+                  ></i>{" "}
                 </button>
               </div>
             </div>
@@ -163,7 +167,11 @@ export default function Daftar() {
                   onClick={() => setShowConfirmPassword((prev) => !prev)}
                   tabIndex={-1}
                 >
-                  {showConfirmPassword ? "🙈" : "👁️"}
+                  <i
+                    className={`fa-solid ${
+                      showConfirmPassword ? "fa-eye-slash" : "fa-eye"
+                    }`}
+                  ></i>
                 </button>
               </div>
             </div>
@@ -191,7 +199,8 @@ export default function Daftar() {
                 <p>Pendaftaran berhasil.</p>
                 <p className="text-muted">
                   Silakan login menggunakan alamat email dan password yang telah
-                  Anda register.
+                  Anda register, pastikan sebelum itu verifikasi terlebih dahulu
+                  di gmail Anda.
                 </p>
                 <button
                   className="btn btn-danger"

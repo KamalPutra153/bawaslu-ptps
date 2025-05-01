@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -13,9 +14,9 @@ export default function Home() {
             <p className="lead">
               Daftarkan diri anda sebagai Pengawas TPS untuk pemilu mendatang.
             </p>
-            <a href="/login" className="btn btn-primary m-3">
-              PTPS
-            </a>
+            <Link href="/login" legacyBehavior>
+              <a className="btn btn-primary m-3">PTPS</a>
+            </Link>
             <a href="#" className="btn btn-secondary m-3">
               ADMIN
             </a>

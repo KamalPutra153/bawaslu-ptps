@@ -14,8 +14,8 @@ export default function Navbar() {
           priority
         />
 
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav ms-auto">
+        <div className="collapse navbar-collapse ms-5">
+          <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <Link className="nav-link" href="/">
                 Beranda
