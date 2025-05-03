@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Pendaftaran() {
   const [step, setStep] = useState(1);
@@ -426,13 +427,15 @@ export default function Pendaftaran() {
                 />
                 <p className="fs-5">
                   Data anda dalam proses pendaftaran{" "}
-                  <strong>"PANWASLU PILKADA 2024 TPS Karangasih"</strong>{" "}
+                  <strong>
+                    &quot;PANWASLU PILKADA 2024 TPS Karangasih&quot;
+                  </strong>{" "}
                   berhasil terkirim. Untuk pengumuman proses tahap selanjutnya
                   akan diinformasikan melalui email pendaftar.
                 </p>
-                <a href="/profile" className="btn btn-danger mt-3">
+                <Link href="/profile" className="btn btn-danger mt-3">
                   Kembali
-                </a>
+                </Link>
               </div>
             )}
 

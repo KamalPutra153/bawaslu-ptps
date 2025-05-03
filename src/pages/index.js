@@ -13,12 +13,12 @@ export default function Home() {
             <p className="lead">
               Daftarkan diri anda sebagai Pengawas TPS untuk pemilu mendatang.
             </p>
-            <Link href="/login" legacyBehavior>
-              <a className="btn btn-primary m-3">PTPS</a>
+            <Link href="/login" className="btn btn-primary m-3">
+              PTPS
             </Link>
-            <a href="/admin-login" className="btn btn-secondary m-3">
-              ADMIN
-            </a>
+            <Link href="/admin-login" className="btn btn-secondary m-3">
+              Admin
+            </Link>
           </div>
           <div className="col-6 text-center ">
             <Image

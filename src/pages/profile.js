@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Link from "next/link";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);
@@ -47,9 +48,12 @@ export default function Profile() {
             <p className="text-muted mb-3">{profile.email}</p>
 
             <div className="d-flex gap-3 flex-wrap">
-              <a href="/dashboard" className="btn btn-outline-secondary btn-sm">
+              <Link
+                href="/dashboard"
+                className="btn btn-outline-secondary btn-sm"
+              >
                 <i className="bi bi-person"></i> Profil
-              </a>
+              </Link>
               <button
                 className="btn btn-outline-danger btn-sm"
                 onClick={async () => {
