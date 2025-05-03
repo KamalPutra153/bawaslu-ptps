@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <section className="home-section">
         <div className="row">
           <div className="col-6 container py-5">
@@ -17,7 +16,7 @@ export default function Home() {
             <Link href="/login" legacyBehavior>
               <a className="btn btn-primary m-3">PTPS</a>
             </Link>
-            <a href="#" className="btn btn-secondary m-3">
+            <a href="/admin-login" className="btn btn-secondary m-3">
               ADMIN
             </a>
           </div>

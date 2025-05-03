@@ -226,3 +226,54 @@ footer {
   font-size: 14px;
 }
 /* PENDAFTARAN SECTION END */
+
+/* PROFILES SECTION START */
+.profile-section {
+  min-height: 100vh;
+}
+/* PROFILES SECTION END */
+
+/* LOGIN ADMIN SECTION START */
+.login-admin {
+  background-color: #e3dfde;
+  min-height: 100vh;
+  padding: 5rem;
+}
+
+.login-admin .container {
+  background-color: #fff;
+  width: 50%;
+  border-radius: 12px;
+  padding: 2rem;
+}
+/* LOGIN ADMIN SECTION END */
+
+/* ADMIN DASHBOARD SECTION START */
+.admin-dashboard {
+  background-color: #e3dfde;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+.admin-dashboard .container {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 12px;
+  padding: 2rem;
+}
+/* ADMIN DASHBOARD SECTION END */
+
+/* KONTAK SECTION START */
+.kontak-section {
+  background-color: #e3dfde;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+.kontak-section .container {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 12px;
+  padding: 2rem;
+}
+/* KONTAK SECTION END */

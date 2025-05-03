@@ -27,23 +27,8 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/pendaftaran">
-                Cara Mendaftar Anggota
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="/pendaftaran">
+              <Link className="nav-link" href="/kontak">
                 Hubungi Kami
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="/pendaftaran">
-                Pengumuman
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="/pendaftaran">
-                Buku Panduan
               </Link>
             </li>
           </ul>

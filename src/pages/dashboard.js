@@ -7,6 +7,8 @@ import { supabase } from "../lib/supabaseClient";
 import wilayah from "@/data/wilayah";
 
 export default function Dashboard() {
+  const router = useRouter(); // inisialisasi router
+
   const [formData, setFormData] = useState({
     nama_lengkap: "",
     nik: "",
@@ -141,7 +143,7 @@ export default function Dashboard() {
                   {label}
                 </label>
                 <div className="col-md-9">
-                  <div className="select-with-icon">
+                  <div className="">
                     <input
                       type={type}
                       className="form-control"
@@ -254,15 +256,14 @@ export default function Dashboard() {
                     .from("profiles")
                     .upsert({ ...formData, id: user.id });
 
-                  if (!error) alert("Data berhasil disimpan!");
+                  if (!error) {
+                    alert("Data berhasil disimpan!");
+                    router.push("/profile"); // arahkan ke halaman profile
+                  }
                 }}
               >
                 Simpan Data
               </button>
-
-              {/* <Link href="/pendaftaran" className="btn btn-primary">
-                Lanjutkan Pendaftaran PTPS
-              </Link> */}
             </div>
           </div>
         </div>

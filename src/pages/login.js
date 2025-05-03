@@ -13,13 +13,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   // Nanti disini bisa tambahkan autentikasi ke Supabase / API
-  //   console.log("Login attempt with:", email, password);
-  //   router.push("/dashboard");
-  // };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMsg("");
@@ -38,7 +31,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
       <section className="login-section">
         <div className="text-center">
           <Image
@@ -107,26 +99,9 @@ export default function Login() {
             </button>
 
             <div className="mb-3 text-center">
-              <a>Belum punya akun?</a>
               <br />
-              <Link href="/daftar">Daftar disini</Link>
+              <Link href="/">Beranda</Link>
               <br />
-              <a className="no-decoration">lupa kata sandi?</a>
-              <Link href="/lupa-password" legacyBehavior>
-                <a className=""> Klik disini</a>
-              </Link>
-              <br />
-              <a className="no-decoration">lupa email?</a>
-              <Link href="/lupa-password" legacyBehavior>
-                <a className=""> Klik disini</a>
-              </Link>
-              <br />
-              <a className="no-decoration">
-                Tidak menerima link aktivasi di email?
-              </a>
-              <Link href="/lupa-password" legacyBehavior>
-                <a className=""> Klik disini</a>
-              </Link>
             </div>
           </form>
         </div>

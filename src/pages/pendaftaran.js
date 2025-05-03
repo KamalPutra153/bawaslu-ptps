@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Image from "next/image";
 
 export default function Pendaftaran() {
   const [step, setStep] = useState(1);
@@ -414,37 +415,62 @@ export default function Pendaftaran() {
             )}
 
             {step === 5 && (
-              <>
-                <div className="alert alert-success">
-                  <strong>Data berhasil diisi!</strong> Silakan kirim formulir.
-                </div>
-              </>
+              <div className="text-center p-4">
+                <Image
+                  src="/assets/img/sukses-removebg.png"
+                  alt="Success"
+                  className="img-fluid mb-4"
+                  width={250}
+                  height={250}
+                  style={{ height: "auto" }}
+                />
+                <p className="fs-5">
+                  Data anda dalam proses pendaftaran{" "}
+                  <strong>"PANWASLU PILKADA 2024 TPS Karangasih"</strong>{" "}
+                  berhasil terkirim. Untuk pengumuman proses tahap selanjutnya
+                  akan diinformasikan melalui email pendaftar.
+                </p>
+                <a href="/profile" className="btn btn-danger mt-3">
+                  Kembali
+                </a>
+              </div>
             )}
 
-            <div className="d-flex justify-content-between">
-              {step > 1 && (
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={prev}
-                >
-                  Kembali
-                </button>
-              )}
-              {step < 5 ? (
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={next}
-                >
-                  Lanjut
-                </button>
-              ) : (
-                <button type="submit" className="btn btn-success">
-                  Kirim
-                </button>
-              )}
-            </div>
+            {step < 5 && (
+              <div className="d-flex justify-content-between">
+                {step > 1 && (
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={prev}
+                  >
+                    Kembali
+                  </button>
+                )}
+                {step < 4 ? (
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={next}
+                  >
+                    Lanjut
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="btn btn-success"
+                    onClick={() => {
+                      alert(
+                        "Terima kasih telah mendaftar! Info tahap selanjutnya akan dikirim ke email Anda."
+                      );
+                      next(); // lanjut ke step 5 setelah alert ditutup
+                    }}
+                  >
+                    Kirim Data
+                  </button>
+                )}
+              </div>
+            )}
           </form>
         </div>
       </section>

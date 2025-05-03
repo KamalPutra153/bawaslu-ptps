@@ -13,15 +13,9 @@ export default function Daftar() {
   const router = useRouter();
 
   const [form, setForm] = useState({
-    namalengkap: "",
     email: "",
-    jenisIdentitas: "",
-    nik: "",
     password: "",
     confirmPassword: "",
-    jenisKelamin: "",
-    jurusan: "",
-    pendidikan: "",
   });
 
   const handleChange = (e) => {
@@ -48,10 +42,7 @@ export default function Daftar() {
       .insert([
         {
           id: authData.user.id,
-          nama_lengkap: form.namalengkap,
           email: form.email,
-          jenis_identitas: form.jenisIdentitas,
-          nik: form.nik,
         },
       ]);
 
@@ -65,23 +56,10 @@ export default function Daftar() {
   };
   return (
     <>
-      <Navbar />
       <section className="daftar-section">
         <div className="container">
           <h4 className="mb-4">Daftar</h4>
-          <h6 className="mb-4">Sudah punya akun? Silahkan masuk disini</h6>
           <form onSubmit={handleDaftar}>
-            <div className="mb-3">
-              <label className="form-label">Nama Lengkap *</label>
-              <input
-                type="text"
-                name="namalengkap"
-                className="form-control"
-                required
-                value={form.namalengkap}
-                onChange={handleChange}
-              />
-            </div>
             <div className="mb-3">
               <label className="form-label">Email</label>
               <input
@@ -92,32 +70,6 @@ export default function Daftar() {
                 value={form.email}
                 onChange={handleChange}
               />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Jenis Identitas</label>
-              <select
-                name="jenisIdentitas"
-                className="form-select"
-                required
-                value={form.jenisIdentitas}
-                onChange={handleChange}
-              >
-                <option value="">Pilih</option>
-                <option value="KTP">KTP</option>
-                <option value="Passport">Passport</option>
-              </select>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">
-                Nomor Induk Kependudukan (NIK) *
-              </label>
-              <input
-                name="nik"
-                className="form-control"
-                required
-                value={form.nik}
-                onChange={handleChange}
-              ></input>
             </div>
 
             <div className="mb-3">
